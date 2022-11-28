@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout}">
+		<th:block layout:fragment="content">
+			<script th:inline="javascript">
+			  /* <![CDATA[ */
+		    var testValue ="[[${testValue}]]";
+			alert(testValue);
+		    /* ]]> */
+			</script>
+		</th:block>
+		
+</html>
