@@ -1,3 +1,20 @@
+const setCookie = function (name, value, expiredDay) {
+    const expired = new Date();
+    expired.setTime(expired.getTime() + expiredDay * 24 * 60 * 60 * 1000);
+
+    document.cookie = name + '=' + encodeURIComponent(value) + ';expires=' + expired.toUTCString() + ';path=/';
+};
+
+const getCookie = function (name) {
+    var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+    return value ? decodeURIComponent(value[2]) : null;
+};
+
+const deleteCookie = function (name) {
+    document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/;';
+    
+}
+
 function onClick(e) {
 	const target = e.target.id;
 	const contents = document.querySelector(".modal_contents");
@@ -20,12 +37,9 @@ function offClick() {
 	document.querySelector(".black_bg").style.display = "none";
 }
 
-document.querySelector("#level").addEventListener("click", onClick);
-document.querySelector(".content2 #joins").addEventListener("click", onClick);
-document.querySelector(".content2 #gift_logo").addEventListener("click", onClick);
-document.querySelector(".modal_close").addEventListener("click", offClick);
+function onDelete() {
+	deleteCookie("refresh");
+	deleteCookie("access");
+	location.href = "http://localhost:8080/jo/";
+}
 
-
-//쿠키에 토큰이 없으면 쿠키에 토큰 저장
-//보낼 쿠키에 access 토큰 붙여서 정보 요청
-//정보를 받아서 html 값 변경
